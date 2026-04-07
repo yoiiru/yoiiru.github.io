@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lestara</title>
+  <meta name="description" content="Lestara — a static prototype for a medieval political and psychological setting." />
+  <style>
+    :root {
+      --bg: #111418;
+      --bg-alt: #161b20;
+      --panel: rgba(18, 22, 27, 0.92);
+      --panel-2: rgba(23, 28, 34, 0.96);
+      --line: rgba(193, 178, 130, 0.32);
+      --line-strong: rgba(193, 178, 130, 0.56);
+      --text: #d7d8dc;
+      --text-soft: #aaafb8;
+      --text-dim: #8a8f98;
+      --accent: #c1b282;
+      --accent-cold: #6b819d;
+      --ornament-accent: #dbcea3;
+      --shadow: rgba(0, 0, 0, 0.42);
+      --max: 1240px;
+      --edge: 2px;
+      --radius: 3px;
+      --font-display: Gelasio, "Times New Roman", serif;
+      --font-subhead: "Palatino Linotype", Palatino, "Book Antiqua", serif;
+      --font-body: "Calibri", Tahoma, Geneva, Verdana, sans-serif;
+      --font-ui: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      --topbar-h: 68px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--topbar-h) + 18px);
+      background-color: #0d1014;
+      overscroll-behavior-y: none;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background-color: #0d1014;
+      background:
+        linear-gradient(rgba(6, 8, 11, 0.7), rgba(8, 10, 13, 0.9)),
+        radial-gradient(circle at top, rgba(96, 116, 148, 0.16), transparent 32%),
+        linear-gradient(180deg, #0c1014 0%, #111418 38%, #0d1014 100%);
+      font-family: var(--font-body);
+      line-height: 1.75;
+      letter-spacing: 0.01em;
+    }
+
+    a {
+      color: #8fb1da;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: #b5cae4;
+      text-decoration: underline;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      background: transparent;
+    }
+
+    .shell {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .main .shell {
+      width: min(calc(100% - 2rem), 1380px);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      min-height: var(--topbar-h);
+      display: flex;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      background: rgba(10, 13, 17, 0.72);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .topbar-inner {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.8rem 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-family: var(--font-display);
+      letter-spacing: 0.12em;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .brand-subtitle {
+      margin: 0.18rem 0 0;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      font-style: italic;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toplink {
+      font: 600 0.8rem/1.2 var(--font-ui);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      border: 1px solid var(--line);
+      padding: 0.55rem 0.8rem;
+      background: rgba(193, 178, 130, 0.04);
+      border-radius: calc(var(--radius) - 2px);
+    }
+
+    .toplink:hover,
+    .toplink:focus-visible {
+      color: var(--accent);
+      background: rgba(193, 178, 130, 0.08);
+      text-decoration: none;
+    }
+
+    .hero {
+      position: relative;
+      min-height: min(86vh, 820px);
+      display: flex;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(6, 8, 11, 0.02), rgba(8, 10, 13, 0.48) 68%, rgba(8, 10, 13, 0.76) 100%),
+        url('assets/lestara_cover_etzbww.png') center center / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(10, 13, 17, 0.05) 0%, rgba(10, 13, 17, 0.1) 28%, rgba(10, 13, 17, 0.34) 72%, rgba(10, 13, 17, 0.64) 100%),
+        linear-gradient(90deg, rgba(12,15,19,0.44) 0%, rgba(12,15,19,0.08) 34%, rgba(12,15,19,0.28) 100%),
+        radial-gradient(circle at 70% 18%, rgba(164, 185, 208, 0.18), transparent 26%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+      padding: 8.5rem 0 4.5rem;
+    }
+
+    .hero-panel {
+      width: min(100%, 820px);
+      padding: 0;
+      background: none;
+      border-left: 0;
+      box-shadow: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.9rem;
+      color: #d7dbe2;
+      font-size: 0.8rem;
+      font-family: var(--font-ui);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.4);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #f2f0ea;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+
+    .motto {
+      margin: 1rem 0 0;
+      color: #e0e3e8;
+      font-style: italic;
+      font-size: 1.06rem;
+      max-width: 44rem;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.38);
+    }
+
+    .divider {
+      margin: 1rem 0 1rem;
+      color: #d8cca4;
+      letter-spacing: 0.45em;
+      font-size: 1.05rem;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.32);
+    }
+
+    .hero-summary {
+      margin: 0;
+      max-width: 52rem;
+      color: #dde1e7;
+      font-size: 0.96rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      line-height: 1.9;
+      text-shadow: 0 2px 18px rgba(0,0,0,0.44);
+    }
+
+    .main {
+      padding: 2.2rem 0 5rem;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1080px);
+      gap: 1.25rem;
+      align-items: start;
+      justify-content: center;
+    }
+
+    .side-nav {
+      position: sticky;
+      top: calc(var(--topbar-h) + 1rem);
+      align-self: start;
+      border: 1px solid rgba(193, 178, 130, 0.18);
+      background: linear-gradient(180deg, rgba(18, 22, 27, 0.95), rgba(23, 28, 34, 0.98));
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
+      padding: 0.9rem;
+      border-radius: var(--radius);
+    }
+
+    .side-nav-title {
+      margin: 0 0 0.65rem;
+      color: var(--text-dim);
+      font: 700 0.75rem/1.3 var(--font-ui);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .side-nav-list {
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .side-link {
+      display: block;
+      border-left: 2px solid transparent;
+      padding: 0.72rem 0.75rem 0.72rem 0.9rem;
+      color: var(--text-soft);
+      font: 600 0.82rem/1.35 var(--font-ui);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.012);
+      border-radius: calc(var(--radius) - 4px);
+      transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .side-link:hover,
+    .side-link:focus-visible,
+    .side-link.active {
+      color: var(--accent);
+      border-left-color: var(--line-strong);
+      background: rgba(193, 178, 130, 0.06);
+      text-decoration: none;
+      outline: none;
+    }
+
+    .content-stack {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid rgba(193, 178, 130, 0.18);
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
+      padding: 1.15rem;
+      border-radius: var(--radius);
+    }
+
+    .section-block {
+      scroll-margin-top: calc(var(--topbar-h) + 18px);
+    }
+
+    .section-head {
+      margin-bottom: 1.2rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--line);
+    }
+
+    .section-kicker {
+      margin: 0 0 0.35rem;
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 3vw, 2.35rem);
+      line-height: 1.1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .section-copy {
+      width: min(100%, 86ch);
+      padding-left: 1rem;
+      color: var(--text);
+    }
+
+    .section-copy p {
+      margin: 0 0 1.15rem;
+    }
+
+    .section-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .lead {
+      color: #eaebee;
+      font-size: 1rem;
+    }
+
+    .ornament {
+      margin: 1.4rem 0 1.3rem;
+      color: var(--ornament-accent);
+      text-align: center;
+      opacity: 0.8;
+      letter-spacing: 0.16em;
+      font-size: 0.92rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .people-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .person-card,
+    .setting-grid,
+    .symbolic {
+      gap: 1.5rem;
+    }
+
+    .person-card {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      align-items: stretch;
+      border: 1px solid rgba(193, 178, 130, 0.2);
+      background: rgba(11, 12, 83, 0.018);
+      overflow: hidden;
+      border-radius: var(--radius);
+    }
+
+    .person-card.reverse {
+      grid-template-columns: minmax(0, 1fr) 300px;
+    }
+
+    .person-card.reverse .person-image {
+      order: 2;
+    }
+
+    .person-card.reverse .person-body {
+      order: 1;
+    }
+
+    .person-image {
+      padding: 0.6rem 0 0.6rem 0.6rem;
+    }
+
+    .person-card.reverse .person-image {
+      padding: 0.6rem 0.6rem 0.6rem 0;
+    }
+
+    .person-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: saturate(0.92) brightness(0.92);
+      /* border-radius: calc(var(--radius) - 6px); */
+      border: 1px solid rgba(193, 178, 130, 0.18);
+    }
+
+    .person-body {
+      padding: 0.9rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .person-name {
+      margin: 0;
+      font-family: var(--font-subhead);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #dde1e8;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .person-meta {
+      /* margin-top: 0.25rem; */
+      color: #8fb1da;
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+    }
+
+    .person-quote {
+      margin: 0.80rem auto 0;
+      max-width: 65ch;
+      color: #e1e3e7;
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .person-ellipsis {
+      margin: 0.65rem 0;
+      color: var(--accent);
+      letter-spacing: 0.28em;
+    }
+
+    .person-copy {
+      margin: 0;
+      color: var(--text);
+      font-size: 0.98rem;
+      line-height: 1.72;
+    }
+
+    .person-copy + .person-copy {
+      margin-top: 0.9rem;
+    }
+
+    .setting-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+      align-items: start;
+    }
+
+    .symbolic {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 360px;
+      align-items: start;
+    }
+
+    .symbolic-copy {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .symbolic-copy .section-head {
+      margin-bottom: 0;
+    }
+
+    .symbolic-copy .section-copy {
+      width: 100%;
+    }
+
+    .symbolic-card {
+      margin: 0;
+      display: grid;
+      /* gap: 0.9rem; */
+      /* padding: 0.95rem; */
+      border: 1px solid rgba(193, 178, 130, 0.18);
+      background: rgba(255,255,255,0.018);
+      border-radius: var(--radius);
+      align-self: stretch;
+    }
+
+    .symbolic-card img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: saturate(0.94) brightness(0.94);
+      border-radius: calc(var(--radius) - 1px);
+    }
+
+    /* .symbolic-note {
+      padding-top: 0.85rem;
+      border-top: 1px solid rgba(193, 178, 130, 0.16);
+      color: var(--text-soft);
+      font-size: 0.94rem;
+      line-height: 1.65;
+    } */
+
+    .lore-symbolic {
+      width: 100%;
+      margin: 0;
+      align-self: start;
+    }
+
+    .breaker {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .plate {
+      position: relative;
+      min-height: 420px;
+      background: #0d1014;
+    }
+
+    .plate img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.9) brightness(0.88);
+    }
+
+    .plate-text {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      padding: 1.15rem 1.2rem 1.2rem;
+      background: linear-gradient(180deg, transparent, rgba(9, 12, 16, 0.72) 36%, rgba(9, 12, 16, 0.88));
+    }
+
+    .plate-label {
+      margin: 0 0 0.35rem;
+      font: 700 0.78rem/1.3 var(--font-subhead);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .plate-note {
+      margin: 0;
+      max-width: 70ch;
+      color: #e3e6eb;
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .setting-image,
+    .wide-image {
+      border: 1px solid rgba(193, 178, 130, 0.18);
+      background: transparent;
+      overflow: hidden;
+    }
+
+    .setting-image img,
+    .wide-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: saturate(0.9) brightness(0.88);
+    }
+
+    .wide-image {
+      margin-top: 1.25rem;
+    }
+
+    .notes {
+      margin-top: 1.35rem;
+      padding: 1rem;
+      border-left: 2px solid var(--line);
+      background: rgba(255,255,255,0.018);
+      color: var(--text-soft);
+    }
+
+    .notes h3 {
+      margin: 0 0 0.5rem;
+      font: 700 0.88rem/1.3 var(--font-ui);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .notes ul {
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+
+    .notes li + li {
+      margin-top: 0.5rem;
+    }
+
+    .footer {
+      padding: 2rem 0 3rem;
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    .footer-line {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto 1rem;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--line) 15%, var(--line) 85%, transparent 100%);
+    }
+
+    @media (max-width: 1040px) {
+      .page-grid { grid-template-columns: 1fr; }
+      .side-nav {
+        position: static;
+        padding: 0.75rem;
+      }
+      .side-nav-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .setting-grid,
+      .symbolic {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .person-card,
+      .person-card.reverse {
+        grid-template-columns: 1fr;
+      }
+      .person-card.reverse .person-image,
+      .person-card.reverse .person-body,
+      .person-card .person-image,
+      .person-card .person-body {
+        order: initial;
+      }
+      .person-image,
+      .person-card.reverse .person-image {
+        padding: 0.8rem 0.8rem 0 0.8rem;
+      }
+      .person-body {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .hero {
+        min-height: 74vh;
+        background-position: center center;
+      }
+      .hero-inner {
+        padding: 6.5rem 0 3rem;
+      }
+      .panel {
+        padding: 1rem;
+      }
+      .plate {
+        min-height: 320px;
+      }
+      .plate-text {
+        padding: 1rem;
+      }
+      .side-nav-list {
+        grid-template-columns: 1fr;
+      }
+      .section-copy {
+        padding-left: 0.6rem;
+      }
+      .symbolic-card {
+        padding: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <p class="brand-title">Lestara</p>
+        <p class="brand-subtitle">Peace and Understanding. Forever may Zieren rule.</p>
+      </div>
+      <a class="toplink" href="#lore">Enter the record</a>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-inner">
+      <div class="hero-panel">
+        <p class="eyebrow">The bloodline of Zieren. The court of</p>
+        <h1 id="hero-title">Lestara</h1>
+        <p class="motto"><em>Peace and Understanding. Forever may Zieren rule.</em></p>
+        <div class="divider">. . . . .</div>
+        <p class="hero-summary">Of Pride and Fear — once Lestara was a realm of ember and gold, 
+          raised by greater hands than those who rule it now. 
+          Having dwelt too long within a peace already won, 
+          its rulers came at last to mistake inheritance for virtue.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main class="main">
+    <div class="shell">
+      <div class="page-grid">
+        <aside class="side-nav" aria-label="Section navigation">
+          <p class="side-nav-title">Sections</p>
+          <nav class="side-nav-list">
+            <a class="side-link active" href="#lore">Lore Primer</a>
+            <a class="side-link" href="#succession">Succession</a>
+            <a class="side-link" href="#war">War with Horisa</a>
+            <a class="side-link" href="#characters">Characters</a>
+            <a class="side-link" href="#setting">Setting</a>
+          </nav>
+        </aside>
+
+        <div class="content-stack">
+          <section class="panel section-block symbolic" id="lore" data-section>
+            <div class="symbolic-copy">
+            <div class="section-head">
+              <p class="section-kicker">Primer</p>
+              <h2 class="section-title">Lore Primer</h2>
+            </div>
+
+            <div class="section-copy">
+              <p class="lead">The Zieren family had long ruled Lestara. Generations ago, the Zierens rose to power after recovering the country from civil war and years of strife, restoring peace to the people.</p>
+              <p>But humans are creatures of pride and greed. In time, the Zieren bloodline rang hollow, yet the throne remained occupied by Zieren, for the nobility and council resisted change, seeking to preserve their own powers and unwilling to contest their comfort. They knew that change implicated uncertainty, and uncertainty risked chaos—better a crumbling crown than a future without answer.</p>
+              <p>Sustained by little more than the legends of old, the throne endured not by strength nor virtue, but by inertia. And within such inertia, the pillars of the Zieren dynasty decayed.</p>
+            </div>
+
+            </div>
+
+            <figure class="symbolic-card lore-symbolic">
+              <img src="assets/lestara_star.png" alt="The Star of Lestara" loading="lazy" tooltip="The Star of Lestara"/>
+              <!-- <figcaption class="symbolic-note">The Star of Lestara. Though naught but a symbol now, legends tell of its power to foretell the fate of those who sought its guidance.</figcaption> -->
+            </figure>
+
+          </section>
+
+          <!-- <div class="ornament">•┈┈┈••┈┈┈••✦ ✧ ･˚ .｡:˚°.✦.°˚:｡. ˚･✧ ✦••┈┈┈••┈┈┈•</div> -->
+
+          <section class="panel breaker" aria-label="Court interior plate">
+            <div class="plate">
+              <img src="assets/lestara_throne_room.png" alt="The throne room." loading="lazy" />
+              <div class="plate-text">
+                <p class="plate-label">The Throne Room</p>
+                <p class="plate-note">Below the banners of royal blue and shimmering gold, King Vince would summon the court and attend to his audience.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel section-block" id="succession" data-section>
+            <div class="section-head">
+              <p class="section-kicker">Conflicts</p>
+              <h2 class="section-title">The Problem of Succession</h2>
+            </div>
+
+            <div class="section-copy">
+              <p class="lead">Inheritance of the crown was never in question—Zieren blood would sit on the throne. Or at least it was assumed. That is, once a relic of the age past—King Vince—would kindly abdicate.</p>
+              <p>But the royal children were born to a dying system and were raised in competition, as fractures. 
+                They were each a different reflection of their father’s failings and their mother’s shame. 
+                The throne would await, but tension between powers ensured no one could approach it unscathed.
+              </p>
+              <p>
+                The council, for its part, had little care for the house of Zieren. 
+                Certain noble families conspired in secret where quiet ambitions stirred,
+                seeking to bind themselves to the emergent influences before anything began; 
+                while others preferred the old king’s continued rule, 
+                finding stagnation more tolerable than a succession in which they had no say.
+              </p>
+           </div>
+
+            <!-- <div class="notes">
+              <h3>header</h3>
+              <ul>
+                <li></li>
+              </ul>
+            </div> -->
+          </section>
+
+          <!-- <div class="ornament">•┈┈┈••┈┈┈••✦ ✧ ･˚ .｡:˚°.✦.°˚:｡. ˚･✧ ✦••┈┈┈••┈┈┈•</div> -->
+
+          <section class="panel section-block" id="war" data-section>
+            <div class="section-head">
+              <p class="section-kicker">History</p>
+              <h2 class="section-title">War with Horisa</h2>
+            </div>
+
+            <div class="section-copy">
+              <p class="lead">Ten years ago war broke out after Horisa sunk a Lestaran merchant ship. “Backed” by the council, King Vince declared war.</p>
+              <p>To what end? A miscalculated bluff? Preservation of hubris? Delusion of grandeur? Hope of reuniting the ruling class? Establishment of legacy? Distraction from domestic conditions? The page does not answer this directly, which is effective. It leaves motive suspended between weakness and vanity.</p>
+              <p>The war eventually drew to a cease-fire. Microaggressions continued nonetheless, with Horisan ships encroaching on Lestara’s coasts. Crown Prince Darius and Princess Darlene continued to monitor Horisa’s movements. The second prince Rafal declared himself a privateer in Lestara’s name and left court. Meanwhile, the people rebuilt to whatever extent they were capable.</p>
+            </div>
+
+            <!-- <div class="wide-image">
+              <img src="assets/lestara-coast.png" alt="Coastal view of Lestara with castle walls and distant settlement." />
+            </div> -->
+          </section>
+
+          <section class="panel breaker">
+            <div class="plate">
+              <img src="assets/siege_of_alstad_1.png" alt="The Siege of Alstad" loading="lazy" />
+              <div class="plate-text">
+                <p class="plate-label">The Siege of Alstad</p>
+                <p class="plate-note">
+                  Alstad is a major port city in Lestara that suffered heavily during the war between Lestara and Horisa. 
+                  Alstad was razed, but not thoroughly destroyed.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- <div class="ornament">•┈┈┈••┈┈┈••✦ ✧ ･˚ .｡:˚°.✦.°˚:｡. ˚･✧ ✦••┈┈┈••┈┈┈•</div> -->
+
+          <section class="panel section-block" id="characters" data-section>
+            <div class="section-head">
+              <p class="section-kicker">Characters</p>
+              <h2 class="section-title">The Royal Family</h2>
+            </div>
+
+            <div class="people-grid">
+              <article class="person-card">
+                <div class="person-image">
+                  <img src="assets/king-vince.png" alt="Portrait of King Vince seated on the throne." />
+                </div>
+                <div class="person-body">
+                  <h3 class="person-name">King Vince</h3>
+                  <div class="person-meta">Demise of a Nation | Glory Regali</div>
+                  <p class="person-quote">"They call you destined, and crowned for greatness—then when you rise to claim it, the world offers nothing but air. Tell me, do you know such futility?"</p>
+                  <div class="person-ellipsis">...</div>
+                  <p class="person-copy">A king on borrowed time, Vince has refused to step down. Striving, yet never quite reaching. Always within sight, never within grasp. He cannot make sense of the world around him, or perhaps the terror of it all holds him back. Something yet feels amiss.</p>
+                  <p class="person-copy">Something yet feels amiss. Surely Darius could benefit from some additional guidance? That must be it. Vince simply wants to see his legacy passed down—To see his son become the perfected testimony of his reign. Heavens forbid all has been for naught.</p>
+                </div>
+              </article>
+
+              <article class="person-card reverse">
+                <div class="person-image">
+                  <img src="assets/queen-veronica.png" alt="Portrait of Queen Veronica holding a fan on a balcony." />
+                </div>
+                <div class="person-body">
+                  <h3 class="person-name">Queen Veronica</h3>
+                  <div class="person-meta">Numb (Shine) | Angry Too</div>
+                  <p class="person-quote">"Of course they smile at you. That’s what people do until it no longer suits them. Sincerity speaks in half-truths, my dear. Give it long enough, and you’ll see it rot. But by all means, if you believe this time is different... Who am I to spoil your illusion?"</p>
+                  <div class="person-ellipsis">...</div>
+                  <p class="person-copy">Born into a noble family of declining influence, young Veronica was pushed to strive and achieve, to rectify the circumstances for her family. If only she could marry the King of Lestara, surely that would change things.</p>
+                  <p class="person-copy">And marry him she did. Veronica had done everything correctly—grace, beauty, the social dance—and she did get what she wanted. Yet somehow it seems she merely traded an iron cage for a golden one, one of infuriating incompetence and endless social strife.</p>
+                </div>
+              </article>
+
+              <article class="person-card">
+                <div class="person-image">
+                  <img src="assets/darius.png" alt="Portrait of Darius in dark armor with sword in hand."/>
+                </div>
+                <div class="person-body">
+                  <h3 class="person-name">Darius · The Prince of Gallows</h3>
+                  <div class="person-meta">The Beast Within | Onward and Upward</div>
+                  <p class="person-quote">"They cried, of course. Always do. One screamed about their children. Another begged to die. Fascinating, truly. Their true selves emerge as they break... And they are convinced that there is one who might take pity. Such desperation is oddly clarifying."</p>
+                  <div class="person-ellipsis">...</div>
+                  <p class="person-copy">The Crown Prince. Heir to the dilapidated throne of Lestara. Bored by the petty squabbles and monotony of court, Darius relishes in thrill and in violence. Civility is a language for those too afraid to act.</p>
+                  <p class="person-copy">Yet Darius awaits his time for when King Vince abdicates. The old man still has use as a meat shield, and Darius already has what he needs. Taking the throne is too much performance anyway, and Darius has no patience for appearances and diplomacy, or worst of all, pretending to care. The power that comes with the throne however, is a different matter.</p>
+                </div>
+              </article>
+
+              <article class="person-card reverse">
+                <div class="person-image">
+                  <img src="assets/rafal.png" alt="Portrait of Rafal in naval attire aboard a ship."/>
+                </div>
+                <div class="person-body">
+                  <h3 class="person-name">Rafal · The Spare Prince</h3>
+                  <div class="person-meta">Atlantic | Achilles Come Down | Morning's Wings</div>
+                  <p class="person-quote">"They say the world can’t be changed. Well, it already has. Just... never as you hoped. Still, you try. Otherwise, what’s the point of surviving it? Perhaps worthwhile things start with a bad idea."</p>
+                  <div class="person-ellipsis">...</div>
+                  <p class="person-copy">Who is the second prince Rafal? That's simple. He's a bastard child, a half-blooded mistake, a troublemaker, the one who lost the city Alstad, the one who killed his closest friend and mentor, the naive fool who ran away to play pirate.</p>
+                  <p class="person-copy">Rafal leaves court post war, renaming himself a privateer to protect Lestara's shores. The court was never meant for Rafal, and he knew that. He would try again as Captain Darktide—Dashing, confident, a good leader to his men upon the freedom of open waters. And as Captain Darktide, Rafal will serve his people. Rafal will live as act of atonement, if for nothing else.</p>
+                </div>
+              </article>
+
+              <article class="person-card">
+                <div class="person-image">
+                  <img src="assets/darlene.png" alt="Portrait of Darlene in dark clothing within a stone hall." />
+                </div>
+                <div class="person-body">
+                  <h3 class="person-name">Darlene · Daughter of Zieren</h3>
+                  <div class="person-meta">Eyes on Fire | Castle | Undone</div>
+                  <p class="person-quote">"I was never meant to matter. Not as heir, not as a daughter. Listen closely. I may be silent, but I will cut twice as deep. So let them ignore me, let them mock. Father always taught people exist to be used. It is only natural that I’d apply the lesson to him and his beloved Darius."</p>
+                  <div class="person-ellipsis">...</div>
+                  <p class="person-copy">The Princess of Lestara. The youngest of the Zieren siblings. Lestara is a shadow of what it could be… and it can be, if only Darlene could cleanse the crown of its own filth—the Crown Prince.</p>
+                  <p class="person-copy">Groomed yet neglected, taught yet ignored, Darlene understands her own irrelevance to the court. She would fall short of Darius... for now. Darlene bides her time, watching. If the crown fits but the sword lifts, then all can be undone. When the court inevitably chokes on its own blood, Darlene will step over the corpses to claim what is hers.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- <div class="ornament">•┈┈┈••┈┈┈••✦ ✧ ･˚ .｡:˚°.✦.°˚:｡. ˚･✧ ✦••┈┈┈••┈┈┈•</div> -->
+
+          <section class="panel section-block" id="setting" data-section>
+            <div class="section-head">
+              <p class="section-kicker">Place</p>
+              <h2 class="section-title">Geography and Tone</h2>
+            </div>
+
+            <div class="setting-grid">
+              <div class="section-copy" style="padding-left: 1rem; width: 100%;">
+                <p class="lead">Lestara should feel expansive but not triumphant. The sea opens the setting outward, while the fortifications and elevated keeps insist on control, watchfulness, and inherited distance.</p>
+                <p>Use the coastal panoramas as structural pauses between denser text blocks. They widen the page visually and keep the politics from becoming claustrophobic. The effect should be solemn rather than theatrical. Grandeur remains present, but as evidence of age and burden.</p>
+                <p>The palette works best when restrained: cold stone, muted slate-blue, ash-grey, and a narrow band of tarnished gold. That combination preserves the royal register while introducing unease. Gold should read as residue, not celebration.</p>
+              </div>
+
+              <div class="setting-image">
+                <img src="assets/lestara-bay.png" alt="Wide view across the bay toward walls, towers, and distant mountains." />
+              </div>
+            </div>
+
+            <div class="notes">
+              <h3>Asset notes</h3>
+              <ul>
+                <li>The cover image now sits directly behind the Lestara title block rather than inside a separate panel.</li>
+                <li>The side rail acts only as navigation. The page itself remains a single continuous scroll.</li>
+                <li>The character portraits in <code>assets/</code> were cropped from your reference screenshots so the prototype renders cleanly.</li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-line"></div>
+    <div class="shell">(✿ ◕▿◕) ❤︎ github.io/yoiiru</div>
+  </footer>
+
+  <script>
+    const sideLinks = document.querySelectorAll('.side-link');
+    const sections = document.querySelectorAll('[data-section]');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.id;
+          sideLinks.forEach((link) => {
+            const active = link.getAttribute('href') === `#${id}`;
+            link.classList.toggle('active', active);
+          });
+        });
+      },
+      {
+        rootMargin: '-20% 0px -55% 0px',
+        threshold: 0.05
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  </script>
+</body>
+</html>

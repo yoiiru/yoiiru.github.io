@@ -479,6 +479,14 @@
       align-items: start;
     }
 
+    .symbolic-left {
+      grid-template-columns: 360px minmax(0, 1.1fr);
+    }
+
+    #book.symbolic-left {
+      grid-template-columns: 460px minmax(0, 1fr);
+    }
+
     .symbolic-copy {
       display: grid;
       gap: 1rem;
@@ -571,6 +579,29 @@
       line-height: 1.7;
     }
 
+    .shore-divider {
+      position: relative;
+      height: clamp(84px, 10vw, 132px);
+      background:
+        linear-gradient(180deg, rgba(9, 12, 16, 0.24), rgba(9, 12, 16, 0.48)),
+        #0d1014;
+    }
+
+    .shore-divider img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(0.9) brightness(0.82);
+    }
+
+    .shore-divider .plate-text {
+      padding: 0.85rem 1.2rem 0.95rem;
+      background: linear-gradient(180deg, transparent, rgba(9, 12, 16, 0.6) 42%, rgba(9, 12, 16, 0.84));
+    }
+
     .setting-image,
     .wide-image {
       border: 1px solid rgba(193, 178, 130, 0.18);
@@ -584,6 +615,32 @@
       height: auto;
       display: block;
       filter: saturate(0.9) brightness(0.88);
+    }
+
+    .book-writing-space {
+      min-height: 100%;
+      border: 1px solid rgba(193, 178, 130, 0.18);
+      background:
+        linear-gradient(180deg, rgba(219, 206, 163, 0.08), rgba(219, 206, 163, 0.03)),
+        repeating-linear-gradient(
+          180deg,
+          rgba(219, 206, 163, 0.08) 0,
+          rgba(219, 206, 163, 0.08) 1px,
+          transparent 1px,
+          transparent 2.6rem
+        ),
+        rgba(255,255,255,0.02);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+      padding: 1.35rem 1.4rem;
+    }
+
+    .book-placeholder {
+      margin: 0;
+      color: var(--text-dim);
+      font-style: italic;
+      min-height: 14rem;
+      display: flex;
+      align-items: flex-start;
     }
 
     .wide-image {
@@ -711,7 +768,7 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-inner">
       <div class="hero-panel">
-        <p class="eyebrow">The bloodline of Zieren. The court of</p>
+        <p class="eyebrow">The bloodline of Zieren</p>
         <h1 id="hero-title">Lestara</h1>
         <p class="motto"><em>Peace and Understanding. Forever may Zieren rule.</em></p>
         <div class="divider">. . . . .</div>
@@ -735,6 +792,7 @@
             <a class="side-link" href="#war">War with Horisa</a>
             <a class="side-link" href="#characters">Characters</a>
             <a class="side-link" href="#setting">Setting</a>
+            <a class="side-link" href="#book">Lorebook</a>
           </nav>
         </aside>
 
@@ -775,7 +833,7 @@
 
           <section class="panel section-block" id="succession" data-section>
             <div class="section-head">
-              <p class="section-kicker">Conflicts</p>
+              <p class="section-kicker">Impending Storms</p>
               <h2 class="section-title">The Problem of Succession</h2>
             </div>
 
@@ -812,8 +870,8 @@
 
             <div class="section-copy">
               <p class="lead">Ten years ago war broke out after Horisa sunk a Lestaran merchant ship. “Backed” by the council, King Vince declared war.</p>
-              <p>To what end? A miscalculated bluff? Preservation of hubris? Delusion of grandeur? Hope of reuniting the ruling class? Establishment of legacy? Distraction from domestic conditions? The page does not answer this directly, which is effective. It leaves motive suspended between weakness and vanity.</p>
-              <p>The war eventually drew to a cease-fire. Microaggressions continued nonetheless, with Horisan ships encroaching on Lestara’s coasts. Crown Prince Darius and Princess Darlene continued to monitor Horisa’s movements. The second prince Rafal declared himself a privateer in Lestara’s name and left court. Meanwhile, the people rebuilt to whatever extent they were capable.</p>
+              <p>To what end? A miscalculated buff? For preservation of hubris? Delusion of grandeur? Hopes of reunifying the ruling class? Establishment of legacy? Distraction from domestic conditions...?</p>
+              <p>The war eventually drew to a cease-fire. Micro aggressions continued nonetheless, with Horisan ships encroaching on Lestara's coasts. The crown prince Darius and Princess Darlene continued to monitor Horisa's movements. The second prince Rafal declared himself a privateer in Lestara's name and left court. In meantime, the people began to rebuild to whatever extent they were capable.</p>
             </div>
 
             <!-- <div class="wide-image">
@@ -917,32 +975,68 @@
 
           <!-- <div class="ornament">•┈┈┈••┈┈┈••✦ ✧ ･˚ .｡:˚°.✦.°˚:｡. ˚･✧ ✦••┈┈┈••┈┈┈•</div> -->
 
+          <section class="panel breaker">
+            <div class="plate">
+              <img src="assets/lestara-coast.png" loading="lazy" />
+              <div class="plate-text">
+                <p class="plate-label">Lestara Coastline</p>
+                <p class="plate-note">
+                  Alstad is a major port city in Lestara that suffered heavily during the war between Lestara and Horisa. 
+                  Alstad was razed, but not thoroughly destroyed.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel breaker">
+            <div class="shore-divider">
+              <img src="assets/lestara_shore_divider.png" loading="lazy" />
+              <div class="plate-text">
+                <p class="plate-label">Lestara Coastline</p>
+                <p class="plate-note">
+                  A foggy, quiet night near the shores of Lestara.
+                </p>
+              </div>
+            </div>
+          </section>
+
           <section class="panel section-block" id="setting" data-section>
             <div class="section-head">
-              <p class="section-kicker">Place</p>
-              <h2 class="section-title">Geography and Tone</h2>
+              <p class="section-kicker">Setting</p>
+              <h2 class="section-title">Geography</h2>
             </div>
 
             <div class="setting-grid">
               <div class="section-copy" style="padding-left: 1rem; width: 100%;">
-                <p class="lead">Lestara should feel expansive but not triumphant. The sea opens the setting outward, while the fortifications and elevated keeps insist on control, watchfulness, and inherited distance.</p>
-                <p>Use the coastal panoramas as structural pauses between denser text blocks. They widen the page visually and keep the politics from becoming claustrophobic. The effect should be solemn rather than theatrical. Grandeur remains present, but as evidence of age and burden.</p>
-                <p>The palette works best when restrained: cold stone, muted slate-blue, ash-grey, and a narrow band of tarnished gold. That combination preserves the royal register while introducing unease. Gold should read as residue, not celebration.</p>
+                <p class="lead">The waters of the Western Seas are calm, encouraging trade and easing travel. Stone fortifications and elevated keeps face the vast waters.</p>
+                <p>It is along the coast that villages once gathered, having now grown into bustling port cities and markets.</p>
+                <p>Beyond the flattened coastline, the land rises into majestic mountains with scattered forests. Trodden paths lead inland, reaching more humble and secluded settlements.</p>
               </div>
 
               <div class="setting-image">
                 <img src="assets/lestara-bay.png" alt="Wide view across the bay toward walls, towers, and distant mountains." />
               </div>
             </div>
+            
+          </section>
 
-            <div class="notes">
-              <h3>Asset notes</h3>
-              <ul>
-                <li>The cover image now sits directly behind the Lestara title block rather than inside a separate panel.</li>
-                <li>The side rail acts only as navigation. The page itself remains a single continuous scroll.</li>
-                <li>The character portraits in <code>assets/</code> were cropped from your reference screenshots so the prototype renders cleanly.</li>
-              </ul>
-            </div>
+          <section class="panel section-block symbolic symbolic-left" id="book" data-section>
+              <figure class="symbolic-card lore-symbolic">
+                <img src="assets/scribe_room.png" loading="lazy" />
+              </figure>
+
+              <div class="symbolic-copy">
+                <div class="section-head">
+                  <p class="section-kicker">Archive</p>
+                  <h2 class="section-title">A Book of Lestara</h2>
+                </div>
+
+                <div class="section-copy">
+                  <p class="lead">A dark medieval setting for the royal court of Lestara.</p>
+                  <p>Lorebook: <a href="https://chub.ai/lorebooks/yoiiru/a-book-of-lestara-81ba6f459ea0" target="_blank" rel="noreferrer">Chub.ai</a></p>
+                </div>
+
+              </div>
           </section>
         </div>
       </div>

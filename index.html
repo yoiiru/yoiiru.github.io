@@ -533,6 +533,11 @@
       align-self: start;
     }
 
+    .succession-star {
+      width: 92%;
+      margin: 0 auto;
+    }
+
     .breaker {
       padding: 0;
       overflow: hidden;
@@ -768,7 +773,7 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-inner">
       <div class="hero-panel">
-        <p class="eyebrow">The bloodline of Zieren</p>
+        <p class="eyebrow">Of Ash and Salt, The bloodline of Zieren</p>
         <h1 id="hero-title">Lestara</h1>
         <p class="motto"><em>Peace and Understanding. Forever may Zieren rule.</em></p>
         <div class="divider">. . . . .</div>
@@ -797,7 +802,7 @@
         </aside>
 
         <div class="content-stack">
-          <section class="panel section-block symbolic" id="lore" data-section>
+          <section class="panel section-block" id="lore" data-section>
             <div class="symbolic-copy">
             <div class="section-head">
               <p class="section-kicker">Primer</p>
@@ -811,11 +816,6 @@
             </div>
 
             </div>
-
-            <figure class="symbolic-card lore-symbolic">
-              <img src="assets/lestara_star.png" alt="The Star of Lestara" loading="lazy" tooltip="The Star of Lestara"/>
-              <!-- <figcaption class="symbolic-note">The Star of Lestara. Though naught but a symbol now, legends tell of its power to foretell the fate of those who sought its guidance.</figcaption> -->
-            </figure>
 
           </section>
 
@@ -831,7 +831,8 @@
             </div>
           </section>
 
-          <section class="panel section-block" id="succession" data-section>
+          <section class="panel section-block symbolic" id="succession" data-section>
+            <div class="symbolic-copy">
             <div class="section-head">
               <p class="section-kicker">Impending Storms</p>
               <h2 class="section-title">The Problem of Succession</h2>
@@ -851,6 +852,12 @@
                 finding stagnation more tolerable than a succession in which they had no say.
               </p>
            </div>
+            </div>
+
+            <figure class="symbolic-card lore-symbolic succession-star">
+              <img src="assets/lestara_star.png" alt="The Star of Lestara" loading="lazy" tooltip="The Star of Lestara"/>
+              <!-- <figcaption class="symbolic-note">The Star of Lestara. Though naught but a symbol now, legends tell of its power to foretell the fate of those who sought its guidance.</figcaption> -->
+            </figure>
 
             <!-- <div class="notes">
               <h3>header</h3>
@@ -862,16 +869,22 @@
 
           <!-- <div class="ornament">•┈┈┈••┈┈┈••✦ ✧ ･˚ .｡:˚°.✦.°˚:｡. ˚･✧ ✦••┈┈┈••┈┈┈•</div> -->
 
-          <section class="panel section-block" id="war" data-section>
-            <div class="section-head">
-              <p class="section-kicker">History</p>
-              <h2 class="section-title">War with Horisa</h2>
-            </div>
+          <section class="panel section-block symbolic symbolic-left" id="war" data-section>
+            <figure class="symbolic-card lore-symbolic">
+              <img src="assets/lestara_war_council.png" alt="War council assembled in Lestara." loading="lazy" />
+            </figure>
 
-            <div class="section-copy">
-              <p class="lead">Ten years ago war broke out after Horisa sunk a Lestaran merchant ship. “Backed” by the council, King Vince declared war.</p>
-              <p>To what end? A miscalculated buff? For preservation of hubris? Delusion of grandeur? Hopes of reunifying the ruling class? Establishment of legacy? Distraction from domestic conditions...?</p>
-              <p>The war eventually drew to a cease-fire. Micro aggressions continued nonetheless, with Horisan ships encroaching on Lestara's coasts. The crown prince Darius and Princess Darlene continued to monitor Horisa's movements. The second prince Rafal declared himself a privateer in Lestara's name and left court. In meantime, the people began to rebuild to whatever extent they were capable.</p>
+            <div class="symbolic-copy">
+              <div class="section-head">
+                <p class="section-kicker">History</p>
+                <h2 class="section-title">War with Horisa</h2>
+              </div>
+
+              <div class="section-copy">
+                <p class="lead">Ten years ago war broke out after Horisa sunk a Lestaran merchant ship. “Backed” by the council, King Vince declared war.</p>
+                <p>To what end? A miscalculated buff? For preservation of hubris? Delusion of grandeur? Hopes of reunifying the ruling class? Establishment of legacy? Distraction from domestic conditions...?</p>
+                <p>The war eventually drew to a cease-fire. Micro aggressions continued nonetheless, with Horisan ships encroaching on Lestara's coasts. The crown prince Darius and Princess Darlene continued to monitor Horisa's movements. The second prince Rafal declared himself a privateer in Lestara's name and left court. In meantime, the people began to rebuild to whatever extent they were capable.</p>
+              </div>
             </div>
 
             <!-- <div class="wide-image">
@@ -988,18 +1001,6 @@
             </div>
           </section>
 
-          <section class="panel breaker">
-            <div class="shore-divider">
-              <img src="assets/lestara_shore_divider.png" loading="lazy" />
-              <div class="plate-text">
-                <p class="plate-label">Lestara Coastline</p>
-                <p class="plate-note">
-                  A foggy, quiet night near the shores of Lestara.
-                </p>
-              </div>
-            </div>
-          </section>
-
           <section class="panel section-block" id="setting" data-section>
             <div class="section-head">
               <p class="section-kicker">Setting</p>
@@ -1038,6 +1039,19 @@
 
               </div>
           </section>
+
+          <section class="panel breaker">
+            <div class="shore-divider">
+              <img src="assets/lestara_shore_divider.png" loading="lazy" />
+              <div class="plate-text">
+                <p class="plate-label">Lestara Coastline</p>
+                <p class="plate-note">
+                  A quiet night near the shores of Lestara. Mist drifts across the water, blurring the horizon. 
+                </p>
+              </div>
+            </div>
+          </section>
+
         </div>
       </div>
     </div>

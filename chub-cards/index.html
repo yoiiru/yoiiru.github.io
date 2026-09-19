@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse Yoiiru's character cards. Open any portrait to view and save the original PNG.">
+  <title>Yoiiru's characters</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #efefef;
+      background: #151a1d;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: url("../assets/winterscape-00040-1723933151.png") center / cover no-repeat;
+    }
+
+    main {
+      width: min(1180px, 92%);
+      height: 100%;
+      margin-inline: auto;
+      padding: 44px 36px 56px;
+      overflow-y: auto;
+      background: rgb(0 0 0 / 85%);
+      scrollbar-color: #606060 transparent;
+      scrollbar-width: thin;
+    }
+
+    h1 {
+      margin: 0 0 36px;
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 300;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 28px 20px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .card {
+      display: block;
+      height: 100%;
+      color: inherit;
+      text-decoration: none;
+      opacity: .95;
+    }
+
+    .card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 3px;
+      background: #202020;
+      box-shadow: 0 0 0 1px rgb(225 232 237 / 14%);
+      transition: box-shadow 180ms ease;
+    }
+
+    .card-name {
+      display: block;
+      margin-top: 11px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: center;
+      overflow-wrap: anywhere;
+      transition: color 180ms ease, text-shadow 180ms ease;
+    }
+
+    .card:hover .card-name,
+    .card:focus-visible .card-name {
+      color: #fff;
+      text-shadow: 0 0 6px rgb(225 232 237 / 20%);
+    }
+
+    .card:hover img,
+    .card:focus-visible img {
+      box-shadow: 0 0 0 1px rgb(225 232 237 / 25%), 0 0 8px rgb(225 232 237 / 7%);
+    }
+
+    .card:focus-visible {
+      outline: 2px solid #e1e8ed;
+      outline-offset: 5px;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      color: #aaa;
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    .footer::before {
+      content: "";
+      display: block;
+      height: 1px;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, transparent, rgb(255 255 255 / 18%) 15%, rgb(255 255 255 / 18%) 85%, transparent);
+    }
+
+    .footer a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 180ms ease, text-shadow 180ms ease;
+    }
+    .footer a:hover,
+    .footer a:focus-visible {
+      color: #c5c5c5;
+      text-shadow: 0 0 6px rgb(225 232 237 / 20%);
+    }
+    .footer a:focus-visible { outline: 2px solid #e1e8ed; outline-offset: 5px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card img, .card-name, .footer a { transition: none; }
+    }
+
+    @media (max-width: 700px) {
+      main { width: 96%; padding: 28px 12px 36px; }
+      h1 { margin-bottom: 26px; }
+      .cards { gap: 20px 8px; }
+      .card-name { font-size: 11px; margin-top: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <main aria-labelledby="page-title" tabindex="0">
+    <h1 id="page-title">Yoiiru's characters</h1>
+    <ul class="cards">
+      <li>
+        <a class="card" href="main_aida-tev-merchant-e886d5efe071_spec_v2.png" target="_blank" rel="noopener" aria-label="Aida Tev, Merchant — open original PNG in a new tab">
+          <img src="thumbnails/main_aida-tev-merchant-e886d5efe071_spec_v2.jpg" width="480" height="640" decoding="async" alt="Aida Tev, Merchant" loading="eager">
+          <span class="card-name">Aida Tev, Merchant</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_akio-0fe1648bc9b9_spec_v2.png" target="_blank" rel="noopener" aria-label="Akio — open original PNG in a new tab">
+          <img src="thumbnails/main_akio-0fe1648bc9b9_spec_v2.jpg" width="480" height="640" decoding="async" alt="Akio" loading="eager">
+          <span class="card-name">Akio</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_akuro-oni-edd0ae5bfade_spec_v2.png" target="_blank" rel="noopener" aria-label="Akuro, Oni — open original PNG in a new tab">
+          <img src="thumbnails/main_akuro-oni-edd0ae5bfade_spec_v2.jpg" width="480" height="640" decoding="async" alt="Akuro, Oni" loading="eager">
+          <span class="card-name">Akuro, Oni</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_ares-god-of-war-6ba99e93_spec_v2.png" target="_blank" rel="noopener" aria-label="Ares, God of War — open original PNG in a new tab">
+          <img src="thumbnails/main_ares-god-of-war-6ba99e93_spec_v2.jpg" width="480" height="640" decoding="async" alt="Ares, God of War" loading="eager">
+          <span class="card-name">Ares, God of War</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_cain-vampire-hunter-11dbb4ff_spec_v2.png" target="_blank" rel="noopener" aria-label="Cain, Vampire Hunter — open original PNG in a new tab">
+          <img src="thumbnails/main_cain-vampire-hunter-11dbb4ff_spec_v2.jpg" width="480" height="640" decoding="async" alt="Cain, Vampire Hunter" loading="eager">
+          <span class="card-name">Cain, Vampire Hunter</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_captain-draven-blackmarrow-967c09fe_spec_v2.png" target="_blank" rel="noopener" aria-label="Captain Draven Blackmarrow — open original PNG in a new tab">
+          <img src="thumbnails/main_captain-draven-blackmarrow-967c09fe_spec_v2.jpg" width="480" height="640" decoding="async" alt="Captain Draven Blackmarrow" loading="eager">
+          <span class="card-name">Captain Draven Blackmarrow</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_captain-lyra-reeds-216a428d_spec_v2.png" target="_blank" rel="noopener" aria-label="Captain Lyra Reeds — open original PNG in a new tab">
+          <img src="thumbnails/main_captain-lyra-reeds-216a428d_spec_v2.jpg" width="480" height="640" decoding="async" alt="Captain Lyra Reeds" loading="eager">
+          <span class="card-name">Captain Lyra Reeds</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_cassius-valence-561d527b_spec_v2.png" target="_blank" rel="noopener" aria-label="Cassius Valence — open original PNG in a new tab">
+          <img src="thumbnails/main_cassius-valence-561d527b_spec_v2.jpg" width="480" height="640" decoding="async" alt="Cassius Valence" loading="eager">
+          <span class="card-name">Cassius Valence</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_charles-ashwood-3a5896572c5c_spec_v2.png" target="_blank" rel="noopener" aria-label="Charles Ashwood — open original PNG in a new tab">
+          <img src="thumbnails/main_charles-ashwood-3a5896572c5c_spec_v2.jpg" width="480" height="640" decoding="async" alt="Charles Ashwood" loading="eager">
+          <span class="card-name">Charles Ashwood</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_circe-valerii-390e2b69_spec_v2.png" target="_blank" rel="noopener" aria-label="Circe Valerii — open original PNG in a new tab">
+          <img src="thumbnails/main_circe-valerii-390e2b69_spec_v2.jpg" width="480" height="640" decoding="async" alt="Circe Valerii" loading="eager">
+          <span class="card-name">Circe Valerii</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_colette-485968ab_spec_v2.png" target="_blank" rel="noopener" aria-label="Colette — open original PNG in a new tab">
+          <img src="thumbnails/main_colette-485968ab_spec_v2.jpg" width="480" height="640" decoding="async" alt="Colette" loading="lazy">
+          <span class="card-name">Colette</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_cyrus-lucretius-d4536b65_spec_v2.png" target="_blank" rel="noopener" aria-label="Cyrus Lucretius — open original PNG in a new tab">
+          <img src="thumbnails/main_cyrus-lucretius-d4536b65_spec_v2.jpg" width="480" height="640" decoding="async" alt="Cyrus Lucretius" loading="lazy">
+          <span class="card-name">Cyrus Lucretius</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_daelan-ce3a5ef9_spec_v2.png" target="_blank" rel="noopener" aria-label="Daelan — open original PNG in a new tab">
+          <img src="thumbnails/main_daelan-ce3a5ef9_spec_v2.jpg" width="480" height="640" decoding="async" alt="Daelan" loading="lazy">
+          <span class="card-name">Daelan</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_doctor-thomas-herz-db0d9a61b686_spec_v2.png" target="_blank" rel="noopener" aria-label="Doctor Thomas Herz — open original PNG in a new tab">
+          <img src="thumbnails/main_doctor-thomas-herz-db0d9a61b686_spec_v2.jpg" width="480" height="640" decoding="async" alt="Doctor Thomas Herz" loading="lazy">
+          <span class="card-name">Doctor Thomas Herz</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_elena-williams-f17d5cad5561_spec_v2.png" target="_blank" rel="noopener" aria-label="Elena Williams — open original PNG in a new tab">
+          <img src="thumbnails/main_elena-williams-f17d5cad5561_spec_v2.jpg" width="480" height="640" decoding="async" alt="Elena Williams" loading="lazy">
+          <span class="card-name">Elena Williams</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_evan-williams-5d987af0fa03_spec_v2.png" target="_blank" rel="noopener" aria-label="Evan Williams — open original PNG in a new tab">
+          <img src="thumbnails/main_evan-williams-5d987af0fa03_spec_v2.jpg" width="480" height="640" decoding="async" alt="Evan Williams" loading="lazy">
+          <span class="card-name">Evan Williams</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_ezra-mage-hunter-7e43c35b_spec_v2.png" target="_blank" rel="noopener" aria-label="Ezra, Mage Hunter — open original PNG in a new tab">
+          <img src="thumbnails/main_ezra-mage-hunter-7e43c35b_spec_v2.jpg" width="480" height="640" decoding="async" alt="Ezra, Mage Hunter" loading="lazy">
+          <span class="card-name">Ezra, Mage Hunter</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_hades-god-of-the-underworld-6dc632b3_spec_v2.png" target="_blank" rel="noopener" aria-label="Hades, God of the Underworld — open original PNG in a new tab">
+          <img src="thumbnails/main_hades-god-of-the-underworld-6dc632b3_spec_v2.jpg" width="480" height="640" decoding="async" alt="Hades, God of the Underworld" loading="lazy">
+          <span class="card-name">Hades, God of the Underworld</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_icarus-volatire-a183bd98fa58_spec_v2.png" target="_blank" rel="noopener" aria-label="Icarus Volatire — open original PNG in a new tab">
+          <img src="thumbnails/main_icarus-volatire-a183bd98fa58_spec_v2.jpg" width="480" height="640" decoding="async" alt="Icarus Volatire" loading="lazy">
+          <span class="card-name">Icarus Volatire</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_isembard-arslan-merchant-0f31529fd071_spec_v2.png" target="_blank" rel="noopener" aria-label="Isembard Arslan, Merchant — open original PNG in a new tab">
+          <img src="thumbnails/main_isembard-arslan-merchant-0f31529fd071_spec_v2.jpg" width="480" height="640" decoding="async" alt="Isembard Arslan, Merchant" loading="lazy">
+          <span class="card-name">Isembard Arslan, Merchant</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_jaeger-backstory-6a3c33b5db93_spec_v2.png" target="_blank" rel="noopener" aria-label="Jaeger, Backstory — open original PNG in a new tab">
+          <img src="thumbnails/main_jaeger-backstory-6a3c33b5db93_spec_v2.jpg" width="480" height="640" decoding="async" alt="Jaeger, Backstory" loading="lazy">
+          <span class="card-name">Jaeger, Backstory</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_jaeger-mercenary-6e7372ea_spec_v2.png" target="_blank" rel="noopener" aria-label="Jaeger, Mercenary — open original PNG in a new tab">
+          <img src="thumbnails/main_jaeger-mercenary-6e7372ea_spec_v2.jpg" width="480" height="640" decoding="async" alt="Jaeger, Mercenary" loading="lazy">
+          <span class="card-name">Jaeger, Mercenary</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_jeral-the-pyromaniac-91016eeba620_spec_v2.png" target="_blank" rel="noopener" aria-label="Jeral, the Pyromaniac — open original PNG in a new tab">
+          <img src="thumbnails/main_jeral-the-pyromaniac-91016eeba620_spec_v2.jpg" width="480" height="640" decoding="async" alt="Jeral, the Pyromaniac" loading="lazy">
+          <span class="card-name">Jeral, the Pyromaniac</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_king-vince-of-lestara-157f865d79ea_spec_v2.png" target="_blank" rel="noopener" aria-label="King Vince of Lestara — open original PNG in a new tab">
+          <img src="thumbnails/main_king-vince-of-lestara-157f865d79ea_spec_v2.jpg" width="480" height="640" decoding="async" alt="King Vince of Lestara" loading="lazy">
+          <span class="card-name">King Vince of Lestara</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_knight-araeth-ruene-62b49d188f9c_spec_v2.png" target="_blank" rel="noopener" aria-label="Knight Araeth Ruene — open original PNG in a new tab">
+          <img src="thumbnails/main_knight-araeth-ruene-62b49d188f9c_spec_v2.jpg" width="480" height="640" decoding="async" alt="Knight Araeth Ruene" loading="lazy">
+          <span class="card-name">Knight Araeth Ruene</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_knight-caleb-a12ffb26_spec_v2.png" target="_blank" rel="noopener" aria-label="Knight Caleb — open original PNG in a new tab">
+          <img src="thumbnails/main_knight-caleb-a12ffb26_spec_v2.jpg" width="480" height="640" decoding="async" alt="Knight Caleb" loading="lazy">
+          <span class="card-name">Knight Caleb</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_knight-xavier-d6971baa_spec_v2.png" target="_blank" rel="noopener" aria-label="Knight Xavier — open original PNG in a new tab">
+          <img src="thumbnails/main_knight-xavier-d6971baa_spec_v2.jpg" width="480" height="640" decoding="async" alt="Knight Xavier" loading="lazy">
+          <span class="card-name">Knight Xavier</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_lord-garvan-2867d77a1d1f_spec_v2.png" target="_blank" rel="noopener" aria-label="Lord Garvan — open original PNG in a new tab">
+          <img src="thumbnails/main_lord-garvan-2867d77a1d1f_spec_v2.jpg" width="480" height="640" decoding="async" alt="Lord Garvan" loading="lazy">
+          <span class="card-name">Lord Garvan</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_lord-thenon-ca0e63c6_spec_v2.png" target="_blank" rel="noopener" aria-label="Lord Thenon — open original PNG in a new tab">
+          <img src="thumbnails/main_lord-thenon-ca0e63c6_spec_v2.jpg" width="480" height="640" decoding="async" alt="Lord Thenon" loading="lazy">
+          <span class="card-name">Lord Thenon</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_loreley-white-sorcerer-3005d789_spec_v2.png" target="_blank" rel="noopener" aria-label="Loreley, White Sorcerer — open original PNG in a new tab">
+          <img src="thumbnails/main_loreley-white-sorcerer-3005d789_spec_v2.jpg" width="480" height="640" decoding="async" alt="Loreley, White Sorcerer" loading="lazy">
+          <span class="card-name">Loreley, White Sorcerer</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_loreley-white-sorcerer-4dcbf97b_spec_v2.png" target="_blank" rel="noopener" aria-label="Loreley, White Sorcerer — open original PNG in a new tab">
+          <img src="thumbnails/main_loreley-white-sorcerer-4dcbf97b_spec_v2.jpg" width="480" height="640" decoding="async" alt="Loreley, White Sorcerer" loading="lazy">
+          <span class="card-name">Loreley, White Sorcerer</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_lotte-e9c632718148_spec_v2.png" target="_blank" rel="noopener" aria-label="Lotte — open original PNG in a new tab">
+          <img src="thumbnails/main_lotte-e9c632718148_spec_v2.jpg" width="480" height="640" decoding="async" alt="Lotte" loading="lazy">
+          <span class="card-name">Lotte</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_luken-the-wolf-king-8287fe8c_spec_v2.png" target="_blank" rel="noopener" aria-label="Luken, the Wolf King — open original PNG in a new tab">
+          <img src="thumbnails/main_luken-the-wolf-king-8287fe8c_spec_v2.jpg" width="480" height="640" decoding="async" alt="Luken, the Wolf King" loading="lazy">
+          <span class="card-name">Luken, the Wolf King</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_lysander-0256e5f1_spec_v2.png" target="_blank" rel="noopener" aria-label="Lysander — open original PNG in a new tab">
+          <img src="thumbnails/main_lysander-0256e5f1_spec_v2.jpg" width="480" height="640" decoding="async" alt="Lysander" loading="lazy">
+          <span class="card-name">Lysander</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_mistress-odette-f510904fab67_spec_v2.png" target="_blank" rel="noopener" aria-label="Mistress Odette — open original PNG in a new tab">
+          <img src="thumbnails/main_mistress-odette-f510904fab67_spec_v2.jpg" width="480" height="640" decoding="async" alt="Mistress Odette" loading="lazy">
+          <span class="card-name">Mistress Odette</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_mori-721d8e2debfd_spec_v2.png" target="_blank" rel="noopener" aria-label="Mori — open original PNG in a new tab">
+          <img src="thumbnails/main_mori-721d8e2debfd_spec_v2.jpg" width="480" height="640" decoding="async" alt="Mori" loading="lazy">
+          <span class="card-name">Mori</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_oswin-mana-trade-merchant-cf7fa914d44c_spec_v2.png" target="_blank" rel="noopener" aria-label="Oswin, Mana Trade Merchant — open original PNG in a new tab">
+          <img src="thumbnails/main_oswin-mana-trade-merchant-cf7fa914d44c_spec_v2.jpg" width="480" height="640" decoding="async" alt="Oswin, Mana Trade Merchant" loading="lazy">
+          <span class="card-name">Oswin, Mana Trade Merchant</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_owen-wynter-2b473dfd_spec_v2.png" target="_blank" rel="noopener" aria-label="Owen Wynter — open original PNG in a new tab">
+          <img src="thumbnails/main_owen-wynter-2b473dfd_spec_v2.jpg" width="480" height="640" decoding="async" alt="Owen Wynter" loading="lazy">
+          <span class="card-name">Owen Wynter</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_prince-acheros-9bb33449_spec_v2.png" target="_blank" rel="noopener" aria-label="Prince Acheros — open original PNG in a new tab">
+          <img src="thumbnails/main_prince-acheros-9bb33449_spec_v2.jpg" width="480" height="640" decoding="async" alt="Prince Acheros" loading="lazy">
+          <span class="card-name">Prince Acheros</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_prince-acheros-backstory-2f978bb7bf2e_spec_v2.png" target="_blank" rel="noopener" aria-label="Prince Acheros, Backstory — open original PNG in a new tab">
+          <img src="thumbnails/main_prince-acheros-backstory-2f978bb7bf2e_spec_v2.jpg" width="480" height="640" decoding="async" alt="Prince Acheros, Backstory" loading="lazy">
+          <span class="card-name">Prince Acheros, Backstory</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_prince-cecil-43481fe4_spec_v2.png" target="_blank" rel="noopener" aria-label="Prince Cecil — open original PNG in a new tab">
+          <img src="thumbnails/main_prince-cecil-43481fe4_spec_v2.jpg" width="480" height="640" decoding="async" alt="Prince Cecil" loading="lazy">
+          <span class="card-name">Prince Cecil</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_prince-damien-fd09790c_spec_v2.png" target="_blank" rel="noopener" aria-label="Prince Damien — open original PNG in a new tab">
+          <img src="thumbnails/main_prince-damien-fd09790c_spec_v2.jpg" width="480" height="640" decoding="async" alt="Prince Damien" loading="lazy">
+          <span class="card-name">Prince Damien</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_prince-darius-1432ef939028_spec_v2.png" target="_blank" rel="noopener" aria-label="Prince Darius — open original PNG in a new tab">
+          <img src="thumbnails/main_prince-darius-1432ef939028_spec_v2.jpg" width="480" height="640" decoding="async" alt="Prince Darius" loading="lazy">
+          <span class="card-name">Prince Darius</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_prince-lucius-1cce9900_spec_v2.png" target="_blank" rel="noopener" aria-label="Prince Lucius — open original PNG in a new tab">
+          <img src="thumbnails/main_prince-lucius-1cce9900_spec_v2.jpg" width="480" height="640" decoding="async" alt="Prince Lucius" loading="lazy">
+          <span class="card-name">Prince Lucius</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_prince-lucius-prologue-96311d8a_spec_v2.png" target="_blank" rel="noopener" aria-label="Prince Lucius, Prologue — open original PNG in a new tab">
+          <img src="thumbnails/main_prince-lucius-prologue-96311d8a_spec_v2.jpg" width="480" height="640" decoding="async" alt="Prince Lucius, Prologue" loading="lazy">
+          <span class="card-name">Prince Lucius, Prologue</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_princess-beatrice-dfcdf44b_spec_v2.png" target="_blank" rel="noopener" aria-label="Princess Beatrice — open original PNG in a new tab">
+          <img src="thumbnails/main_princess-beatrice-dfcdf44b_spec_v2.jpg" width="480" height="640" decoding="async" alt="Princess Beatrice" loading="lazy">
+          <span class="card-name">Princess Beatrice</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_princess-darlene-dfc8c39e3984_spec_v2.png" target="_blank" rel="noopener" aria-label="Princess Darlene — open original PNG in a new tab">
+          <img src="thumbnails/main_princess-darlene-dfc8c39e3984_spec_v2.jpg" width="480" height="640" decoding="async" alt="Princess Darlene" loading="lazy">
+          <span class="card-name">Princess Darlene</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_princess-wisteria-65b3b504_spec_v2.png" target="_blank" rel="noopener" aria-label="Princess Wisteria — open original PNG in a new tab">
+          <img src="thumbnails/main_princess-wisteria-65b3b504_spec_v2.jpg" width="480" height="640" decoding="async" alt="Princess Wisteria" loading="lazy">
+          <span class="card-name">Princess Wisteria</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_privateer-rafal-6371e70cdb40_spec_v2.png" target="_blank" rel="noopener" aria-label="Privateer Rafal — open original PNG in a new tab">
+          <img src="thumbnails/main_privateer-rafal-6371e70cdb40_spec_v2.jpg" width="480" height="640" decoding="async" alt="Privateer Rafal" loading="lazy">
+          <span class="card-name">Privateer Rafal</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_queen-miranda-03ed603a6a78_spec_v2.png" target="_blank" rel="noopener" aria-label="Queen Miranda — open original PNG in a new tab">
+          <img src="thumbnails/main_queen-miranda-03ed603a6a78_spec_v2.jpg" width="480" height="640" decoding="async" alt="Queen Miranda" loading="lazy">
+          <span class="card-name">Queen Miranda</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_rowan-the-bastard-prince-754997d126c8_spec_v2.png" target="_blank" rel="noopener" aria-label="Rowan, the Bastard Prince — open original PNG in a new tab">
+          <img src="thumbnails/main_rowan-the-bastard-prince-754997d126c8_spec_v2.jpg" width="480" height="640" decoding="async" alt="Rowan, the Bastard Prince" loading="lazy">
+          <span class="card-name">Rowan, the Bastard Prince</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_sako-akiyama-a6b0dce505d2_spec_v2.png" target="_blank" rel="noopener" aria-label="Sako Akiyama — open original PNG in a new tab">
+          <img src="thumbnails/main_sako-akiyama-a6b0dce505d2_spec_v2.jpg" width="480" height="640" decoding="async" alt="Sako Akiyama" loading="lazy">
+          <span class="card-name">Sako Akiyama</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_sir-caleb-30531ed8_spec_v2.png" target="_blank" rel="noopener" aria-label="Sir Caleb — open original PNG in a new tab">
+          <img src="thumbnails/main_sir-caleb-30531ed8_spec_v2.jpg" width="480" height="640" decoding="async" alt="Sir Caleb" loading="lazy">
+          <span class="card-name">Sir Caleb</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_soren-valcaryn-872b9d11_spec_v2.png" target="_blank" rel="noopener" aria-label="Soren Valcaryn — open original PNG in a new tab">
+          <img src="thumbnails/main_soren-valcaryn-872b9d11_spec_v2.jpg" width="480" height="640" decoding="async" alt="Soren Valcaryn" loading="lazy">
+          <span class="card-name">Soren Valcaryn</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_the-pillory-at-riversend-5d60de56e6a2_spec_v2.png" target="_blank" rel="noopener" aria-label="The Pillory at Riversend — open original PNG in a new tab">
+          <img src="thumbnails/main_the-pillory-at-riversend-5d60de56e6a2_spec_v2.jpg" width="480" height="640" decoding="async" alt="The Pillory at Riversend" loading="lazy">
+          <span class="card-name">The Pillory at Riversend</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_tonmund-slave-trader-1df3ea42a909_spec_v2.png" target="_blank" rel="noopener" aria-label="Tonmund, Slave Trader — open original PNG in a new tab">
+          <img src="thumbnails/main_tonmund-slave-trader-1df3ea42a909_spec_v2.jpg" width="480" height="640" decoding="async" alt="Tonmund, Slave Trader" loading="lazy">
+          <span class="card-name">Tonmund, Slave Trader</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_veronica-queen-of-lestara-e8f091850699_spec_v2.png" target="_blank" rel="noopener" aria-label="Veronica, Queen of Lestara — open original PNG in a new tab">
+          <img src="thumbnails/main_veronica-queen-of-lestara-e8f091850699_spec_v2.jpg" width="480" height="640" decoding="async" alt="Veronica, Queen of Lestara" loading="lazy">
+          <span class="card-name">Veronica, Queen of Lestara</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_your-father-the-king-8806e1eb_spec_v2.png" target="_blank" rel="noopener" aria-label="Your Father, the King — open original PNG in a new tab">
+          <img src="thumbnails/main_your-father-the-king-8806e1eb_spec_v2.jpg" width="480" height="640" decoding="async" alt="Your Father, the King" loading="lazy">
+          <span class="card-name">Your Father, the King</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_yvette-mage-hunter-e91d44ee_spec_v2.png" target="_blank" rel="noopener" aria-label="Yvette, Mage Hunter — open original PNG in a new tab">
+          <img src="thumbnails/main_yvette-mage-hunter-e91d44ee_spec_v2.jpg" width="480" height="640" decoding="async" alt="Yvette, Mage Hunter" loading="lazy">
+          <span class="card-name">Yvette, Mage Hunter</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="main_zander-callum-97c122d8ef44_spec_v2.png" target="_blank" rel="noopener" aria-label="Zander Callum — open original PNG in a new tab">
+          <img src="thumbnails/main_zander-callum-97c122d8ef44_spec_v2.jpg" width="480" height="640" decoding="async" alt="Zander Callum" loading="lazy">
+          <span class="card-name">Zander Callum</span>
+        </a>
+      </li>
+    </ul>
+    <footer class="footer">
+      <a href="../index.html">(✿ ◕▿◕) ❤︎ yoiiru.github.io</a>
+    </footer>
+  </main>
+  <script src="scroll.js" defer></script>
+</body>
+</html>
